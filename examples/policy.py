@@ -35,7 +35,9 @@ import argparse
 import json
 import os
 import time
+import sys
 
+sys.path.append('/home/tidy/catkin_ws/src/gqcnn')
 import numpy as np
 
 from autolab_core import (YamlConfig, Logger, BinaryImage, CameraIntrinsics,
@@ -47,6 +49,7 @@ from gqcnn.grasping import (RobustGraspingPolicy,
                             FullyConvolutionalGraspingPolicyParallelJaw,
                             FullyConvolutionalGraspingPolicySuction)
 from gqcnn.utils import GripperMode
+
 
 # Set up logger.
 logger = Logger.get_logger("examples/policy.py")
@@ -187,6 +190,7 @@ if __name__ == "__main__":
     # Read images.
     depth_data = np.load(depth_im_filename)
     depth_im = DepthImage(depth_data, frame=camera_intr.frame)
+    
     color_im = ColorImage(np.zeros([depth_im.height, depth_im.width,
                                     3]).astype(np.uint8),
                           frame=camera_intr.frame)

@@ -369,7 +369,7 @@ class GQCNNTrainerTF(object):
                 self.prefetch_q_workers.append(p)
 
             # Init TF variables.
-            init = tf.global_variables_initializer()
+            init = tf.compat.v1.global_variables_initializer()
             self.sess.run(init)
 
             self.logger.info("Beginning Optimization...")
@@ -1308,7 +1308,7 @@ class GQCNNTrainerTF(object):
 
         # Initialize the variables again now that we have added some new ones.
         with self.sess.as_default():
-            tf.global_variables_initializer().run()
+            tf.compat.v1.global_variables_initializer().run()
 
     def _cleanup(self):
         self.logger.info("Cleaning and preparing to exit optimization...")
